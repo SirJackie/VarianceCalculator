@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+    <head>
+        <title>计算方差</title>
+
+        <style>
+            .button{
+                font-size: 48px;
+                width: 19%;
+                border: 0;
+                margin: 0;
+                padding: 0;
+                border-radius: 30px;
+                padding-left: 10px !important;
+                box-shadow: black;
+                background: linear-gradient(160deg, rgb(226, 29, 29), rgb(255, 208, 0));
+                font-family: 微软雅黑;
+            }
+            .inputBar{
+                font-size: 48px;
+                width: 35%;
+                border: 0;
+                margin: 0;
+                padding: 0;
+                border-radius: 30px;
+                padding-left: 10px !important;
+                box-shadow: black;
+                font-family: 微软雅黑; 
+            }
+            body{
+                background: linear-gradient(
+                    160deg, rgb(0,144,255), rgb(0,255,213));
+                height:100%;
+                margin:0;
+            }
+            .main{
+                background: rgba(255, 255, 255, 0.5);
+                padding:5%;
+                margin:5%;
+            }
+            .showBar{
+                font-size: 48px;
+                font-family: 微软雅黑;
+            }
+        </style>
+
+        <script>
+            var list = [];
+
+            function ShowOnBar(){
+                var str = "当前列表: [";
+                for(var i = 0; i < list.length; i++){
+                    if(i != 0){
+                        str += ", ";
+                    }
+                    str += list[i];
+                }
+                str += "]";
+                document.getElementsByClassName("showBar")[0].innerHTML = str;
+            }
+
+            function SubmitToArray(){
+                var value = document.getElementById("bar").value;
+                var num = Math.floor(value);
+                list[list.length] = num;
+                console.log(list);
+                document.getElementById("bar").value = "";
+                ShowOnBar();
+            }
+
+            function ClearArray(){
+                list = [];
+                console.log(list);
+                ShowOnBar();
+            }
+
+            function Claculate(){
+                var total = 0;
+                for(var i = 0; i < list.length; i++){
+                    total += list[i];
+                }
+                var averange = total / list.length;
+
+                var totalError = 0;
+                for(var i = 0; i < list.length; i++){
+                    var tmp = list[i] - averange;
+                    totalError += tmp * tmp;
+                }
+                alert("平均数: " + averange)
+                alert("方差: " + (totalError / list.length));
+
+                ClearArray();
+                ShowOnBar();
+            }
+
+            window.onload = function(){
+                ShowOnBar();
+            }
+        </script>
+    </head>
+    <body>
+        <div class="main">
+            <center>
+                <div class="showBar"></div>
+            </center>
+            <input class="inputBar" id="bar">
+            <button class="button" onclick="ClearArray()"    >清空</button>
+            <button class="button" onclick="SubmitToArray()" >提交</button>
+            <button class="button" onclick="Claculate()"     >计算</button>
+        </div>
+    </body>
+</html>
