@@ -45,6 +45,27 @@
         </style>
 
         <script>
+            function BubbleSort(array){
+                for(var i = 0; i < array.length; i++){
+                    for(var j = 0; j < array.length; j++){
+                        if(array[i] < array[j]){
+                            var swap = array[i];
+                            array[i] = array[j];
+                            array[j] = swap;
+                        }
+                    }
+                }
+            }
+
+            function CopyArray(originArray){
+                
+            }
+
+            var array = [1,5,9,7,6,3,4,8,2];
+
+            BubbleSort(array);
+            console.log(array);
+
             var list = [];
 
             function ShowOnBar(){
